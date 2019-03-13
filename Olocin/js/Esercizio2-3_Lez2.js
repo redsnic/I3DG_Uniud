@@ -79,7 +79,7 @@
    */
   function prepare(){
 	  /* Material                               Proprieties as object */
-	  triangleMaterial = new THREE.MeshBasicMaterial({ color: 0x005500, wireframe:true});
+	  triangleMaterial = new THREE.MeshBasicMaterial({ color: 0x005500, wireframe: true});
 	  	
 	  console.log(triangles);
 	  	
@@ -145,10 +145,10 @@
   	triangles.push(makeTriangle(v[0],v[2],v[3],0,2,3));
   	triangles.push(makeTriangle(v[0],v[3],v[4],0,3,4));
   	triangles.push(makeTriangle(v[0],v[4],v[1],0,4,1));
-  	triangles.push(makeTriangle(v[5],v[1],v[2],5,1,2));
-  	triangles.push(makeTriangle(v[5],v[2],v[3],5,2,3));
-  	triangles.push(makeTriangle(v[5],v[3],v[4],5,3,4));
-  	triangles.push(makeTriangle(v[5],v[4],v[1],5,4,1));
+  	triangles.push(makeTriangle(v[5],v[2],v[1],5,2,1));
+  	triangles.push(makeTriangle(v[5],v[3],v[2],5,3,2));
+  	triangles.push(makeTriangle(v[5],v[4],v[3],5,4,3));
+  	triangles.push(makeTriangle(v[5],v[1],v[4],5,1,4));
   
   	index = 6; // active index for new vertices
   	

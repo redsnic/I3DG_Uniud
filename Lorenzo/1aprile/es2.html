@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>ES 2</title>
+		<style>
+		
+		body {
+			font-family: Monospace;
+			background-color: #f0f0f0;
+			margin: 0px;
+			overflow: hidden;
+		}
+		
+		canvas { 
+			width: 100%; 
+			height: 100%;
+		}
+	
+	</style>
+		<script src="../lib/three.js"></script>
+		<script src="../lib/stats.js"></script>
+		<script src="../lib/dat.gui.js"></script>
+	</head>
+	<body>
+	
+		<script type="text/x-glsl" id="vertex">
+			uniform float lightXIN;
+			uniform float lightYIN;
+			varying vec3 vNormal;
+			varying float lightX;
+			varying float lightY;
+
+			void main() {
+		    	// transforms the vertex from object space to clip space coords		
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+				vNormal = normal;
+				lightX = lightXIN;
+				lightY = lightYIN;
+			}
+		</script>
+		
+		<script type="text/x-glsl" id="fragment">
+			varying vec3 vNormal;
+			varying float lightX;
+			varying float lightY;
+
+			void main() {
+				float col = dot( vNormal, normalize(vec3(lightX,lightY,50.0)) );
+				gl_FragColor = vec4(col, col, col, 1.0);
+			}
+		</script>
+	
+		
+		<script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			camera.position.set( 0, 0, 50 );
+
+			var XlightSourcePos = 50.0;
+			var YlightSourcePos = 50.0;
+			
+			var renderer = new THREE.WebGLRenderer({ antialias: true });
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setClearColor( 0xf0f0f0 );
+			document.body.appendChild( renderer.domElement );
+
+			var controller = new function() {
+				this.positionX = XlightSourcePos;
+				this.positionY = YlightSourcePos;
+			}();
+			var gui = new dat.GUI();
+			var f1 = gui.addFolder('Move');
+   			f1.add(controller, 'positionX', -80, 80).onChange( function() {
+				XlightSourcePos = (controller.positionX);
+    		});
+			f1.add(controller, 'positionY', -80, 80).onChange( function() {
+				YlightSourcePos = (controller.positionY);
+    		});
+			
+			// scene code here
+			
+
+			var uniforms = { lightXIN:	{ type: "float", value: XlightSourcePos}, lightYIN:	{ type: "float", value: YlightSourcePos} };
+					
+			var vs = document.getElementById("vertex").textContent;
+			var fs = document.getElementById("fragment").textContent;
+			
+			var sphereMaterial = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vs, fragmentShader: fs });
+			
+			sphere = new THREE.Mesh(
+				new THREE.SphereGeometry( 10, 32, 16 ),
+				sphereMaterial );
+				
+			scene.add( sphere );
+			stats = new Stats();
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.top = '0px';
+			document.body.appendChild( stats.domElement );
+			
+			function render() {
+				requestAnimationFrame( render );
+				uniforms = { lightXIN:	{ type: "float", value: XlightSourcePos}, lightYIN:	{ type: "float", value: YlightSourcePos} };
+				var newMaterial = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vs, fragmentShader: fs });
+				sphere.material = newMaterial;
+				stats.update();
+				renderer.render(scene, camera);
+			}
+			
+			render();
+		</script>
+	</body>
+</html>

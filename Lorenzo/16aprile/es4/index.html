@@ -28,14 +28,36 @@
 	</script>
 
 	<script type="text/x-glsl" id="fragment">
-		varying vec3 vNormal;
+            varying vec3 vNormal;
 			varying vec3 vPosition;
 			uniform vec3 pointLightPosition; // in world space
 			uniform vec3 clight;
-			uniform vec3 cspec;
-			uniform vec3 cdiff;
+			uniform vec3 material_color;
+			uniform float metalness;
 			uniform float roughness;
 			const float PI = 3.14159;
+			
+			vec3 cdiff;
+			vec3 cspec;
+			
+			           
+			float mapLinear(float value, float sourceMin, float sourceMax, float destMin, float destMax ) {
+                float result = destMin + (( value - sourceMin ) * ( destMax - destMin )) / ( sourceMax - sourceMin );
+                return result;
+            }
+            
+            void set_cdiff_cspec() {
+                cdiff = vec3(0.0);
+                cspec = vec3(0.0);
+			
+                cdiff.r = max( material_color.r - metalness, 0.0 );
+                cdiff.g = max( material_color.g - metalness, 0.0 );
+                cdiff.b = max( material_color.b - metalness, 0.0 );
+                
+                cspec.r = mapLinear( material_color.r * metalness, 0.0, 1.0, 0.04, 1.0 );
+                cspec.g = mapLinear( material_color.g * metalness, 0.0, 1.0, 0.04, 1.0 );
+                cspec.b = mapLinear( material_color.b * metalness, 0.0, 1.0, 0.04, 1.0 );
+            }
 
 			vec3 FSchlick(float lDoth) {
 				return (cspec + (vec3(1.0)-cspec)*pow(1.0 - lDoth,5.0));
@@ -57,6 +79,9 @@
 			}
 
 			void main() {
+			
+                set_cdiff_cspec();
+                
 				vec4 lPosition = viewMatrix * vec4( pointLightPosition, 1.0 );
 				vec3 l = normalize(lPosition.xyz - vPosition.xyz);
 				vec3 n = normalize( vNormal );  // interpolation destroys normalization, so we have to normalize
@@ -72,7 +97,6 @@
 				vec3 BRDF = (vec3(1.0)-fresnel)*cdiff/PI + fresnel*GSmith(nDotv,nDotl)*DGGX(nDoth,roughness*roughness)/
 					(4.0*nDotl*nDotv);
 				vec3 outRadiance = PI* clight * nDotl * BRDF;
-				// gamma encode the final value
 				gl_FragColor = vec4(pow( outRadiance, vec3(1.0/2.2)), 1.0);
 			}
     </script>

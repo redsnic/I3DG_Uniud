@@ -13,19 +13,17 @@ var lightParameters = {
 
 // default: red plastic
 var materialParameters = {
-	cdiff_red: 0.7,
-	cdiff_green: 0.0,
-	cdiff_blue: 0.0,
-	cspec_red: 0.04,
-	cspec_green: 0.04,
-	cspec_blue: 0.04,
+    material_red: 0.8,
+    material_green: 0.2,
+    material_blue: 0.1,
+    metalness: 1.0,
 	roughness: 0.3
 }
 
 var uniforms = {
-	cspec:	{ type: "v3", value: new THREE.Vector3() },
-	cdiff:	{ type: "v3", value: new THREE.Vector3() },
+	material_color:	{ type: "v3", value: new THREE.Vector3() },
 	roughness: {type: "f", value: 0.5},
+    metalness: {type: "f", value: 1.0},
 	pointLightPosition:	{ type: "v3", value: new THREE.Vector3() },
 	clight:	{ type: "v3", value: new THREE.Vector3() },
 };
@@ -106,28 +104,23 @@ function buildGui() {
     lightSettings.add(lightParameters,'intensity').min(0).max(10000).onChange( function(newVal) { render() });
 
 	materialSettings = gui.addFolder('material settings');
-	materialSettings.add(materialParameters,'cdiff_red').min(0).max(1).onChange( function(newVal) { render() });
-	materialSettings.add(materialParameters,'cdiff_green').min(0).max(1).onChange( function(newVal) { render() });
-	materialSettings.add(materialParameters,'cdiff_blue').min(0).max(1).onChange( function(newVal) { render() });
-	materialSettings.add(materialParameters,'cspec_red').min(0).max(1).onChange( function(newVal) { render() });
-	materialSettings.add(materialParameters,'cspec_green').min(0).max(1).onChange( function(newVal) { render() });
-	materialSettings.add(materialParameters,'cspec_blue').min(0).max(1).onChange( function(newVal) { render() });
+	materialSettings.add(materialParameters,'material_red').min(0).max(1).onChange( function(newVal) { render() });
+	materialSettings.add(materialParameters,'material_green').min(0).max(1).onChange( function(newVal) { render() });
+	materialSettings.add(materialParameters,'material_blue').min(0).max(1).onChange( function(newVal) { render() });
 	materialSettings.add(materialParameters,'roughness').min(0).max(1).onChange( function(newVal) { render() });
+    materialSettings.add(materialParameters,'metalness').min(0).max(1).onChange( function(newVal) { render() });
 }
 
 function updateUniforms() {
-	uniforms.cspec.value = new THREE.Vector3(
-        materialParameters.cspec_red,
-        materialParameters.cspec_green,
-        materialParameters.cspec_blue );
-
-	uniforms.cdiff.value = new THREE.Vector3(
-        materialParameters.cdiff_red,
-        materialParameters.cdiff_green,
-        materialParameters.cdiff_blue );
+	uniforms.material_color.value = new THREE.Vector3(
+        materialParameters.material_red,
+        materialParameters.material_green,
+        materialParameters.material_blue );
 
 	uniforms.roughness.value = materialParameters.roughness>0.0?materialParameters.roughness:0.01;
-                    
+    
+    uniforms.metalness.value = materialParameters.metalness;
+    
     uniforms.clight.value = new THREE.Vector3(
 		lightParameters.red * lightParameters.intensity,
 		lightParameters.green * lightParameters.intensity,

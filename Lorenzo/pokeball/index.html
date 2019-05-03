@@ -44,6 +44,7 @@
 		uniform vec3 clight;
 		uniform sampler2D specularMap;
 		uniform sampler2D diffuseMap;
+        uniform sampler2D rougMap;
         const float PI = 3.14159;
 
 		vec3 cdiff;
@@ -86,7 +87,7 @@
 			cdiff = pow( cdiff, vec3(2.2));
 			cspec = texture2D( specularMap, vertexUV ).rgb;
 			cspec = pow( cspec, vec3(2.2));
-			roughness = 1.0;
+			roughness = texture2D( rougMap, vertexUV).r;
 
 			vec3 fresnel = FSchlick(lDoth);
 			vec3 BRDF = (vec3(1.0)-fresnel)*cdiff/PI + fresnel*GSmith(nDotv,nDotl)*DGGX(nDoth,roughness*roughness)/

@@ -15,6 +15,7 @@ let lightParameters = {
 
 let textureDiffuse = loadTexture("texture/poke/pokeball_diffuse.png");
 let textureSpecular = loadTexture("texture/poke/pokeball_spec.png");
+let textureRoug = loadTexture("texture/poke/pokeball_roug.png");
 
 let uniforms = {
     //cspec: { type: "v3", value: new THREE.Vector3(0.04, 0.04, 0.04) },
@@ -23,6 +24,7 @@ let uniforms = {
     clight: { type: "v3", value: new THREE.Vector3() },
     diffuseMap: { type: "t", value: textureDiffuse },
     specularMap: { type: "t", value: textureSpecular },
+    rougMap: { type: "t", value: textureRoug },
 }
 
 let vs = document.getElementById("vertex").textContent;

@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 let vs = document.getElementById("vertex").textContent;
 let fs = document.getElementById("fragment").textContent;
 
@@ -159,25 +161,25 @@ function buildGui() {
     lightSettings.add(lightParameters, 'intensity').min(0).max(10).onChange(function (newVal) { render() });
 
     let textureSettings = gui.addFolder('Texture parameters');
-    textureSettings.add(textures, 'top', ["Pokeball", "Masterball", "Metal"]).onChange(
+    textureSettings.add(textures, 'top', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
         function (newVal) {
             setTexture(newVal, "Top");
             topMaterial.needsUpdate = true;
             render()
         });
-    textureSettings.add(textures, 'bottom', ["Pokeball", "Masterball", "Metal"]).onChange(
+    textureSettings.add(textures, 'bottom', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
         function (newVal) {
             setTexture(newVal, "Bottom");
             bottomMaterial.needsUpdate = true;
             render()
         });
-    textureSettings.add(textures, 'ring', ["Pokeball", "Masterball", "Metal"]).onChange(
+    textureSettings.add(textures, 'ring', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
         function (newVal) {
             setTexture(newVal, "Ring");
             bottomMaterial.needsUpdate = true;
             render()
         });
-    textureSettings.add(textures, 'button', ["Pokeball", "Masterball", "Metal"]).onChange(
+    textureSettings.add(textures, 'button', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
         function (newVal) {
             setTexture(newVal, "Button");
             bottomMaterial.needsUpdate = true;
@@ -310,6 +312,38 @@ function setTexture(textureType, part) {
                     textureButtonMaterial.specular = loadTexture("texture/steel/CorrugatedSteel01_met.jpg");
                     textureButtonMaterial.normal = loadTexture("texture/steel/CorrugatedSteel01_nrm.jpg");
                     textureButtonMaterial.roug = loadTexture("texture/steel/CorrugatedSteel01_rgh.jpg");
+                    break;
+            }
+            break;
+        case "Plastic":
+            switch (part) {
+                case "Top":
+                    //set textureTopMaterial to plastic
+                    textureTopMaterial.diffuse = loadTexture("texture/plastic/diffuse.png");
+                    textureTopMaterial.specular = loadTexture("texture/plastic/spec.png");
+                    textureTopMaterial.normal = loadTexture("texture/plastic/normal.png");
+                    textureTopMaterial.roug = loadTexture("texture/poke/pokeball_roug.png");
+                    break;
+                case "Bottom":
+                    //set textureBottomMaterial to plastic
+                    textureBottomMaterial.diffuse = loadTexture("texture/plastic/diffuse.png");
+                    textureBottomMaterial.specular = loadTexture("texture/plastic/spec.png");
+                    textureBottomMaterial.normal = loadTexture("texture/plastic/normal.png");
+                    textureBottomMaterial.roug = loadTexture("texture/poke/pokeball_roug.png");
+                    break;
+                case "Ring":
+                    //set textureRingMaterial to plastic
+                    textureRingMaterial.diffuse = loadTexture("texture/plastic/diffuse.png");
+                    textureRingMaterial.specular = loadTexture("texture/plastic/spec.png");
+                    textureRingMaterial.normal = loadTexture("texture/plastic/normal.png");
+                    textureRingMaterial.roug = loadTexture("texture/poke/pokeball_roug.png");
+                    break;
+                case "Button":
+                    //set textureButtonMaterial to plastic
+                    textureButtonMaterial.diffuse = loadTexture("texture/plastic/diffuse.png");
+                    textureButtonMaterial.specular = loadTexture("texture/plastic/spec.png");
+                    textureButtonMaterial.normal = loadTexture("texture/plastic/normal.png");
+                    textureButtonMaterial.roug = loadTexture("texture/poke/pokeball_roug.png");
                     break;
             }
             break;

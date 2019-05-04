@@ -10,6 +10,37 @@ let bottomGeometry, bottomMaterial, bottomMesh;
 let ringGeometry, ringMaterial, ringMesh;
 let buttonGeometry, buttonMaterial, buttonMesh;
 
+let vs = document.getElementById("vertex").textContent;
+let fs = document.getElementById("fragment").textContent;
+
+let textureTopMaterial = {
+    diffuse : loadTexture("texture/poke/pokeball_diffuse.png"),
+    specular : loadTexture("texture/poke/pokeball_spec.png"),
+    normal : loadTexture("texture/poke/pokeball_normal.png"),
+    roug : loadTexture("texture/poke/pokeball_roug.png"),
+}
+
+let textureBottomMaterial = {
+    diffuse : loadTexture("texture/poke/pokeball_diffuse.png"),
+    specular : loadTexture("texture/poke/pokeball_spec.png"),
+    normal : loadTexture("texture/poke/pokeball_normal.png"),
+    roug : loadTexture("texture/poke/pokeball_roug.png"),
+}
+
+let textureRingMaterial = {
+    diffuse : loadTexture("texture/poke/pokeball_diffuse.png"),
+    specular : loadTexture("texture/poke/pokeball_spec.png"),
+    normal : loadTexture("texture/poke/pokeball_normal.png"),
+    roug : loadTexture("texture/poke/pokeball_roug.png"),
+}
+
+let textureButtonMaterial = {
+    diffuse : loadTexture("texture/poke/pokeball_diffuse.png"),
+    specular : loadTexture("texture/poke/pokeball_spec.png"),
+    normal : loadTexture("texture/poke/pokeball_normal.png"),
+    roug : loadTexture("texture/poke/pokeball_roug.png"),
+}
+
 // default: white, 1.0 intensity
 let lightParameters = {
     red: 1.0,
@@ -18,84 +49,99 @@ let lightParameters = {
     intensity: 1.0
 }
 
-let textureDiffuse = loadTexture("texture/poke/pokeball_diffuse.png");
-//let textureDiffuse = loadTexture("texture/master/master_diffuse.png");
-let textureSpecular = loadTexture("texture/poke/pokeball_spec.png");
-let textureRoug = loadTexture("texture/poke/pokeball_roug.png");
-let textureNormal = loadTexture("texture/poke/pokeball_normal.png");
-//let textureNormal = loadTexture("texture/master/master_normal.png");
+let uniformsTopMaterial = {
+    pointLightPosition: { type: "v3", value: new THREE.Vector3() },
+    clight: { type: "v3", value: new THREE.Vector3() },
+    diffuseMap: { type: "t", value: textureTopMaterial.diffuse },
+    specularMap: { type: "t", value: textureTopMaterial.specular },
+    rougMap: { type: "t", value: textureTopMaterial.roug },
+    normalMap: { type: "t", value: textureTopMaterial.normal },
+}
 
+let uniformsBottomMaterial = {
+    pointLightPosition: { type: "v3", value: new THREE.Vector3() },
+    clight: { type: "v3", value: new THREE.Vector3() },
+    diffuseMap: { type: "t", value: textureBottomMaterial.diffuse },
+    specularMap: { type: "t", value: textureBottomMaterial.specular },
+    rougMap: { type: "t", value: textureBottomMaterial.roug },
+    normalMap: { type: "t", value: textureBottomMaterial.normal },
+}
 
+let uniformsRingMaterial = {
+    pointLightPosition: { type: "v3", value: new THREE.Vector3() },
+    clight: { type: "v3", value: new THREE.Vector3() },
+    diffuseMap: { type: "t", value: textureRingMaterial.diffuse },
+    specularMap: { type: "t", value: textureRingMaterial.specular },
+    rougMap: { type: "t", value: textureRingMaterial.roug },
+    normalMap: { type: "t", value: textureRingMaterial.normal },
+}
+
+let uniformsButtonMaterial = {
+    pointLightPosition: { type: "v3", value: new THREE.Vector3() },
+    clight: { type: "v3", value: new THREE.Vector3() },
+    diffuseMap: { type: "t", value: textureButtonMaterial.diffuse },
+    specularMap: { type: "t", value: textureButtonMaterial.specular },
+    rougMap: { type: "t", value: textureButtonMaterial.roug },
+    normalMap: { type: "t", value: textureButtonMaterial.normal },
+}
+
+/*
 // steel texture
 let textureDiffuseSteel = loadTexture("texture/steel/CorrugatedSteel01_col.jpg");
 let textureSpecularSteel = loadTexture("texture/steel/CorrugatedSteel01_met.jpg");
 let textureNormalSteel = loadTexture("texture/steel/CorrugatedSteel01_nrm.jpg");
-let textureRougSteel = loadTexture("texture/steel/CorrugatedSteel01_rgh.jpg");
+let textureRougSteel = loadTexture("texture/steel/CorrugatedSteel01_rgh.jpg");*/
 
-let uniformsDefault = {
-    pointLightPosition: { type: "v3", value: new THREE.Vector3() },
-    clight: { type: "v3", value: new THREE.Vector3() },
-    diffuseMap: { type: "t", value: textureDiffuse },
-    specularMap: { type: "t", value: textureSpecular },
-    rougMap: { type: "t", value: textureRoug },
-    normalMap: { type: "t", value: textureNormal },
-}
 
-let uniformsSteel = {
-    pointLightPosition: { type: "v3", value: new THREE.Vector3() },
-    clight: { type: "v3", value: new THREE.Vector3() },
-    diffuseMap: { type: "t", value: textureDiffuseSteel },
-    specularMap: { type: "t", value: textureSpecularSteel },
-    rougMap: { type: "t", value: textureRougSteel },
-    normalMap: { type: "t", value: textureNormalSteel },
-}
+topMaterial = new THREE.ShaderMaterial( {uniforms: uniformsTopMaterial, vertexShader: vs, fragmentShader: fs });
+bottomMaterial = new THREE.ShaderMaterial( {uniforms: uniformsBottomMaterial, vertexShader: vs, fragmentShader: fs });
+ringMaterial = new THREE.ShaderMaterial( {uniforms: uniformsRingMaterial, vertexShader: vs, fragmentShader: fs });
+buttonMaterial = new THREE.ShaderMaterial( {uniforms: uniformsButtonMaterial, vertexShader: vs, fragmentShader: fs });
 
-let vs = document.getElementById("vertex").textContent;
-let fs = document.getElementById("fragment").textContent;
-
-let matDefault = new THREE.ShaderMaterial({ uniforms: uniformsDefault, vertexShader: vs, fragmentShader: fs });
-matDefault.vertexTangents = true;
-matDefault.needsUpdate = true;
-
-let matSteel = new THREE.ShaderMaterial({ uniforms: uniformsSteel, vertexShader: vs, fragmentShader: fs });
-matSteel.vertexTangents = true;
-matSteel.needsUpdate = true;
+topMaterial.vertexTangents = true; topMaterial.needsUpdate = true;
+bottomMaterial.vertexTangents = true; bottomMaterial.needsUpdate = true;
+ringMaterial.vertexTangents = true; ringMaterial.needsUpdate = true;
+buttonMaterial.vertexTangents = true; buttonMaterial.needsUpdate = true;
 
 let loader = new THREE.OBJLoader2();
 loader.useIndices = true;
 loader.load("model/pokeball_smooth.obj", function (obj) {
     topGeometry = obj.detail.loaderRootNode.children[2].geometry;
-    topMesh = new THREE.Mesh(topGeometry, matDefault);
-    topMesh.scale.multiplyScalar(0.9);
+    topMesh = new THREE.Mesh(topGeometry, topMaterial);
+    //topMesh.scale.multiplyScalar(0.9);
     THREE.BufferGeometryUtils.computeTangents(topGeometry);
     scene.add(topMesh);
 
     bottomGeometry = obj.detail.loaderRootNode.children[1].geometry;
-    bottomMesh = new THREE.Mesh(bottomGeometry, matSteel);
-    bottomMesh.scale.multiplyScalar(0.9);
+    bottomMesh = new THREE.Mesh(bottomGeometry, bottomMaterial);
+    //bottomMesh.scale.multiplyScalar(0.9);
     THREE.BufferGeometryUtils.computeTangents(bottomGeometry);
     scene.add(bottomMesh);
 
     ringGeometry = obj.detail.loaderRootNode.children[3].geometry;
-    ringMesh = new THREE.Mesh(ringGeometry, matDefault);
-    ringMesh.scale.multiplyScalar(0.9);
+    ringMesh = new THREE.Mesh(ringGeometry, ringMaterial);
+    //ringMesh.scale.multiplyScalar(0.9);
     THREE.BufferGeometryUtils.computeTangents(ringGeometry);
     scene.add(ringMesh);
 
     buttonGeometry = obj.detail.loaderRootNode.children[0].geometry;
-    buttonMesh = new THREE.Mesh(buttonGeometry, matSteel);
-    buttonMesh.scale.multiplyScalar(0.9);
+    buttonMesh = new THREE.Mesh(buttonGeometry, buttonMaterial);
+    //buttonMesh.scale.multiplyScalar(0.9);
     THREE.BufferGeometryUtils.computeTangents(buttonGeometry);
     scene.add(buttonMesh);
 });
 
 let lightMesh = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), new THREE.MeshBasicMaterial({ color: 0xffff00, wireframe: true }));
 lightMesh.position.set(7.0, 7.0, 7.0);
-uniformsDefault.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-uniformsDefault.clight.value = new THREE.Vector3(1.0,1.0,1.0);
 
-uniformsSteel.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-uniformsSteel.clight.value = new THREE.Vector3(1.0,1.0,1.0);
+uniformsTopMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+uniformsTopMaterial.clight.value = new THREE.Vector3(1.0,1.0,1.0);
+uniformsBottomMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+uniformsBottomMaterial.clight.value = new THREE.Vector3(1.0,1.0,1.0);
+uniformsRingMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+uniformsRingMaterial.clight.value = new THREE.Vector3(1.0,1.0,1.0);
+uniformsButtonMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+uniformsButtonMaterial.clight.value = new THREE.Vector3(1.0,1.0,1.0);
 
 let stats = new Stats();
 

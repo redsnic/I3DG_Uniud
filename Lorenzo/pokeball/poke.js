@@ -353,28 +353,36 @@ function setTexture(textureType, part) {
 function updateUniforms() {
 
     uniformsTopMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsTopMaterial.clight.value = new THREE.Vector3(1.0, 1.0, 1.0);
+    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+        lightParameters.intensity * lightParameters.green,
+        lightParameters.intensity * lightParameters.blue);
     uniformsTopMaterial.diffuseMap.value = textureTopMaterial.diffuse;
     uniformsTopMaterial.specularMap.value = textureTopMaterial.specular;
     uniformsTopMaterial.rougMap.value = textureTopMaterial.roug;
     uniformsTopMaterial.normalMap.value = textureTopMaterial.normal;
 
     uniformsBottomMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsBottomMaterial.clight.value = new THREE.Vector3(1.0, 1.0, 1.0);
+    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+        lightParameters.intensity * lightParameters.green,
+        lightParameters.intensity * lightParameters.blue);
     uniformsBottomMaterial.diffuseMap.value = textureBottomMaterial.diffuse;
     uniformsBottomMaterial.specularMap.value = textureBottomMaterial.specular;
     uniformsBottomMaterial.rougMap.value = textureBottomMaterial.roug;
     uniformsBottomMaterial.normalMap.value = textureBottomMaterial.normal;
 
     uniformsRingMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsRingMaterial.clight.value = new THREE.Vector3(1.0, 1.0, 1.0);
+    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+        lightParameters.intensity * lightParameters.green,
+        lightParameters.intensity * lightParameters.blue);
     uniformsRingMaterial.diffuseMap.value = textureRingMaterial.diffuse;
     uniformsRingMaterial.specularMap.value = textureRingMaterial.specular;
     uniformsRingMaterial.rougMap.value = textureRingMaterial.roug;
     uniformsRingMaterial.normalMap.value = textureRingMaterial.normal;
 
     uniformsButtonMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsButtonMaterial.clight.value = new THREE.Vector3(1.0, 1.0, 1.0);
+    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+        lightParameters.intensity * lightParameters.green,
+        lightParameters.intensity * lightParameters.blue);
     uniformsButtonMaterial.diffuseMap.value = textureButtonMaterial.diffuse;
     uniformsButtonMaterial.specularMap.value = textureButtonMaterial.specular;
     uniformsButtonMaterial.rougMap.value = textureButtonMaterial.roug;

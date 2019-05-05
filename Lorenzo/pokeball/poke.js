@@ -62,16 +62,17 @@ initializeTextureUniforms();
 initializeValueUniforms();
 
 // texture materials
-//topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureTopMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
-//bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureBottomMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
-//ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureRingMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
-//buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureButtonMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureTopMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureBottomMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureRingMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureButtonMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
 
+// use the following lines to use custom material
 // value materials
-topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueTopMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
-bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueBottomMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
-ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueRingMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
-buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueButtonMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+//topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueTopMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+//bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueBottomMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+//ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueRingMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+//buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueButtonMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
 
 topMaterial.vertexTangents = true; topMaterial.needsUpdate = true;
 bottomMaterial.vertexTangents = true; bottomMaterial.needsUpdate = true;

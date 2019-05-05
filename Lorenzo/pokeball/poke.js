@@ -3,8 +3,8 @@
 let texturingVertexShader = document.getElementById("texturingVertex").textContent;
 let texturingFragmentShader = document.getElementById("texturingFragment").textContent;
 
-//let valueVertexShader = document.getElementById("valueVertex").textContent;
-//let valueFragmentShader = document.getElementById("valueFragment").textContent;
+let valueVertexShader = document.getElementById("valueVertex").textContent;
+let valueFragmentShader = document.getElementById("valueFragment").textContent;
 
 let renderer = new THREE.WebGLRenderer({ antialias: true });
 let camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
@@ -61,10 +61,17 @@ let lightParameters = {
 initializeTextureUniforms();
 initializeValueUniforms();
 
-topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureTopMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
-bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureBottomMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
-ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureRingMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
-buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureButtonMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+// texture materials
+//topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureTopMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+//bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureBottomMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+//ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureRingMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+//buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureButtonMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+
+// value materials
+topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueTopMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueBottomMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueRingMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
+buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsValueButtonMaterial, vertexShader: valueVertexShader, fragmentShader: valueFragmentShader });
 
 topMaterial.vertexTangents = true; topMaterial.needsUpdate = true;
 bottomMaterial.vertexTangents = true; bottomMaterial.needsUpdate = true;
@@ -230,26 +237,30 @@ function initializeTextureMaterials() {
 function initializeValueMaterials() {
     valueTopMaterial = {
         diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
-        specular: new THREE.Vector3(0.9, 0.8, 0.7),
-        roug: 0.2,
+        specular: new THREE.Vector3(1.022, 0.782, 0.344),
+        roug: 0.6,
+        normal: loadTexture("texture/poke/pokeball_normal.png"),
     }
 
     valueBottomMaterial = {
         diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
-        specular: new THREE.Vector3(0.9, 0.8, 0.7),
-        roug: 0.2,
+        specular: new THREE.Vector3(0.972, 0.960, 0.915),
+        roug: 0.6,
+        normal: loadTexture("texture/poke/pokeball_normal.png"),
     }
 
     valueRingMaterial = {
         diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
         specular: new THREE.Vector3(0.9, 0.8, 0.7),
         roug: 0.2,
+        normal: loadTexture("texture/poke/pokeball_normal.png"),
     }
 
     valueButtonMaterial = {
         diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
-        specular: new THREE.Vector3(0.9, 0.8, 0.7),
+        specular: new THREE.Vector3(1.022, 0.782, 0.344),
         roug: 0.2,
+        normal: loadTexture("texture/poke/pokeball_normal.png"),
     }
 }
 
@@ -470,6 +481,7 @@ function initializeValueUniforms() {
         diffuse: { type: "v3", value: new THREE.Vector3(valueTopMaterial.diffuse.x, valueTopMaterial.diffuse.y, valueTopMaterial.diffuse.z) },
         specular: { type: "v3", value: new THREE.Vector3(valueTopMaterial.specular.x, valueTopMaterial.specular.y, valueTopMaterial.specular.z) },
         roug: { type: "f", value: valueTopMaterial.roug },
+        normalMap: { type: "t", value: valueTopMaterial.normal },
     }
 
     uniformsValueBottomMaterial = {
@@ -478,6 +490,7 @@ function initializeValueUniforms() {
         diffuse: { type: "v3", value: new THREE.Vector3(valueBottomMaterial.diffuse.x, valueBottomMaterial.diffuse.y, valueBottomMaterial.diffuse.z) },
         specular: { type: "v3", value: new THREE.Vector3(valueBottomMaterial.specular.x, valueBottomMaterial.specular.y, valueBottomMaterial.specular.z) },
         roug: { type: "f", value: valueBottomMaterial.roug },
+        normalMap: { type: "t", value: valueBottomMaterial.normal },
     }
 
     uniformsValueRingMaterial = {
@@ -486,6 +499,7 @@ function initializeValueUniforms() {
         diffuse: { type: "v3", value: new THREE.Vector3(valueRingMaterial.diffuse.x, valueRingMaterial.diffuse.y, valueRingMaterial.diffuse.z) },
         specular: { type: "v3", value: new THREE.Vector3(valueRingMaterial.specular.x, valueRingMaterial.specular.y, valueRingMaterial.specular.z) },
         roug: { type: "f", value: valueRingMaterial.roug },
+        normalMap: { type: "t", value: valueRingMaterial.normal },
     }
 
     uniformsValueButtonMaterial = {
@@ -494,6 +508,7 @@ function initializeValueUniforms() {
         diffuse: { type: "v3", value: new THREE.Vector3(valueButtonMaterial.diffuse.x, valueButtonMaterial.diffuse.y, valueButtonMaterial.diffuse.z) },
         specular: { type: "v3", value: new THREE.Vector3(valueButtonMaterial.specular.x, valueButtonMaterial.specular.y, valueButtonMaterial.specular.z) },
         roug: { type: "f", value: valueButtonMaterial.roug },
+        normalMap: { type: "t", value: valueButtonMaterial.normal },
     }
 }
 

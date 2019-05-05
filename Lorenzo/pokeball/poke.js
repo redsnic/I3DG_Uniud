@@ -1,9 +1,10 @@
 'use strict';
 
+let texturingVertexShader = document.getElementById("texturingVertex").textContent;
+let texturingFragmentShader = document.getElementById("texturingFragment").textContent;
 
-
-let vs = document.getElementById("vertex").textContent;
-let fs = document.getElementById("fragment").textContent;
+//let valueVertexShader = document.getElementById("valueVertex").textContent;
+//let valueFragmentShader = document.getElementById("valueFragment").textContent;
 
 let renderer = new THREE.WebGLRenderer({ antialias: true });
 let camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
@@ -20,11 +21,17 @@ let bottomGeometry, bottomMaterial, bottomMesh;
 let ringGeometry, ringMaterial, ringMesh;
 let buttonGeometry, buttonMaterial, buttonMesh;
 
-// declaring the structures storing the textures for the parts of the ball
+// declaring the structures storing the textures for the materials of the ball
 let textureTopMaterial, textureBottomMaterial, textureRingMaterial, textureButtonMaterial;
 
-// declaring the structures storing the uniforms for the materials of the parts of the ball
-let uniformsTopMaterial, uniformsBottomMaterial, uniformsRingMaterial, uniformsButtonMaterial;
+// declaring the structures storing the values for the materials of the ball
+let valueTopMaterial, valueBottomMaterial, valueRingMaterial, valueButtonMaterial;
+
+// declaring the structures storing the uniforms for the texture materials of the parts of the ball
+let uniformsTextureTopMaterial, uniformsTextureBottomMaterial, uniformsTextureRingMaterial, uniformsTextureButtonMaterial;
+
+// declaring the structures storing the uniforms for the value materials of the parts of the ball
+let uniformsValueTopMaterial, uniformsValueBottomMaterial, uniformsValueRingMaterial, uniformsValueButtonMaterial;
 
 // structure with the initial textures
 let textures = {
@@ -34,7 +41,9 @@ let textures = {
     button: "Pokeball",
 }
 
-initializeTextures();
+
+initializeTextureMaterials();
+initializeValueMaterials();
 
 setTexture("Pokeball", "Top");
 setTexture("Pokeball", "Bottom");
@@ -49,12 +58,13 @@ let lightParameters = {
     intensity: 1.0
 }
 
-initializeUniforms();
+initializeTextureUniforms();
+initializeValueUniforms();
 
-topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTopMaterial, vertexShader: vs, fragmentShader: fs });
-bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsBottomMaterial, vertexShader: vs, fragmentShader: fs });
-ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsRingMaterial, vertexShader: vs, fragmentShader: fs });
-buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsButtonMaterial, vertexShader: vs, fragmentShader: fs });
+topMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureTopMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+bottomMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureBottomMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+ringMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureRingMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
+buttonMaterial = new THREE.ShaderMaterial({ uniforms: uniformsTextureButtonMaterial, vertexShader: texturingVertexShader, fragmentShader: texturingFragmentShader });
 
 topMaterial.vertexTangents = true; topMaterial.needsUpdate = true;
 bottomMaterial.vertexTangents = true; bottomMaterial.needsUpdate = true;
@@ -161,25 +171,25 @@ function buildGui() {
     lightSettings.add(lightParameters, 'intensity').min(0).max(10).onChange(function (newVal) { render() });
 
     let textureSettings = gui.addFolder('Texture parameters');
-    textureSettings.add(textures, 'top', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
+    textureSettings.add(textures, 'top', ["Pokeball", "Masterball", "Blue", "Rubber"]).onChange(
         function (newVal) {
             setTexture(newVal, "Top");
             topMaterial.needsUpdate = true;
             render()
         });
-    textureSettings.add(textures, 'bottom', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
+    textureSettings.add(textures, 'bottom', ["Pokeball", "Masterball", "Blue", "Rubber"]).onChange(
         function (newVal) {
             setTexture(newVal, "Bottom");
             bottomMaterial.needsUpdate = true;
             render()
         });
-    textureSettings.add(textures, 'ring', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
+    textureSettings.add(textures, 'ring', ["Pokeball", "Masterball", "Blue", "Rubber"]).onChange(
         function (newVal) {
             setTexture(newVal, "Ring");
             bottomMaterial.needsUpdate = true;
             render()
         });
-    textureSettings.add(textures, 'button', ["Pokeball", "Masterball", "Metal", "Plastic"]).onChange(
+    textureSettings.add(textures, 'button', ["Pokeball", "Masterball", "Blue", "Rubber"]).onChange(
         function (newVal) {
             setTexture(newVal, "Button");
             bottomMaterial.needsUpdate = true;
@@ -187,7 +197,7 @@ function buildGui() {
         });
 }
 
-function initializeTextures() {
+function initializeTextureMaterials() {
     textureTopMaterial = {
         diffuse: loadTexture("texture/poke/pokeball_diffuse.png"),
         specular: loadTexture("texture/poke/pokeball_spec.png"),
@@ -214,6 +224,32 @@ function initializeTextures() {
         specular: loadTexture("texture/poke/pokeball_spec.png"),
         normal: loadTexture("texture/poke/pokeball_normal.png"),
         roug: loadTexture("texture/poke/pokeball_roug.png"),
+    }
+}
+
+function initializeValueMaterials() {
+    valueTopMaterial = {
+        diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
+        specular: new THREE.Vector3(0.9, 0.8, 0.7),
+        roug: 0.2,
+    }
+
+    valueBottomMaterial = {
+        diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
+        specular: new THREE.Vector3(0.9, 0.8, 0.7),
+        roug: 0.2,
+    }
+
+    valueRingMaterial = {
+        diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
+        specular: new THREE.Vector3(0.9, 0.8, 0.7),
+        roug: 0.2,
+    }
+
+    valueButtonMaterial = {
+        diffuse: new THREE.Vector3(0.0, 0.0, 0.0),
+        specular: new THREE.Vector3(0.9, 0.8, 0.7),
+        roug: 0.2,
     }
 }
 
@@ -283,7 +319,7 @@ function setTexture(textureType, part) {
                     break;
             }
             break;
-        case "Metal":
+        case "Blue":
             switch (part) {
                 case "Top":
                     //set textureTopMaterial to metal
@@ -315,7 +351,7 @@ function setTexture(textureType, part) {
                     break;
             }
             break;
-        case "Plastic":
+        case "Rubber":
             switch (part) {
                 case "Top":
                     //set textureTopMaterial to plastic
@@ -352,45 +388,45 @@ function setTexture(textureType, part) {
 
 function updateUniforms() {
 
-    uniformsTopMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+    uniformsTextureTopMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+    uniformsTextureTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
         lightParameters.intensity * lightParameters.green,
         lightParameters.intensity * lightParameters.blue);
-    uniformsTopMaterial.diffuseMap.value = textureTopMaterial.diffuse;
-    uniformsTopMaterial.specularMap.value = textureTopMaterial.specular;
-    uniformsTopMaterial.rougMap.value = textureTopMaterial.roug;
-    uniformsTopMaterial.normalMap.value = textureTopMaterial.normal;
+    uniformsTextureTopMaterial.diffuseMap.value = textureTopMaterial.diffuse;
+    uniformsTextureTopMaterial.specularMap.value = textureTopMaterial.specular;
+    uniformsTextureTopMaterial.rougMap.value = textureTopMaterial.roug;
+    uniformsTextureTopMaterial.normalMap.value = textureTopMaterial.normal;
 
-    uniformsBottomMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+    uniformsTextureBottomMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+    uniformsTextureBottomMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
         lightParameters.intensity * lightParameters.green,
         lightParameters.intensity * lightParameters.blue);
-    uniformsBottomMaterial.diffuseMap.value = textureBottomMaterial.diffuse;
-    uniformsBottomMaterial.specularMap.value = textureBottomMaterial.specular;
-    uniformsBottomMaterial.rougMap.value = textureBottomMaterial.roug;
-    uniformsBottomMaterial.normalMap.value = textureBottomMaterial.normal;
+    uniformsTextureBottomMaterial.diffuseMap.value = textureBottomMaterial.diffuse;
+    uniformsTextureBottomMaterial.specularMap.value = textureBottomMaterial.specular;
+    uniformsTextureBottomMaterial.rougMap.value = textureBottomMaterial.roug;
+    uniformsTextureBottomMaterial.normalMap.value = textureBottomMaterial.normal;
 
-    uniformsRingMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+    uniformsTextureRingMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+    uniformsTextureRingMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
         lightParameters.intensity * lightParameters.green,
         lightParameters.intensity * lightParameters.blue);
-    uniformsRingMaterial.diffuseMap.value = textureRingMaterial.diffuse;
-    uniformsRingMaterial.specularMap.value = textureRingMaterial.specular;
-    uniformsRingMaterial.rougMap.value = textureRingMaterial.roug;
-    uniformsRingMaterial.normalMap.value = textureRingMaterial.normal;
+    uniformsTextureRingMaterial.diffuseMap.value = textureRingMaterial.diffuse;
+    uniformsTextureRingMaterial.specularMap.value = textureRingMaterial.specular;
+    uniformsTextureRingMaterial.rougMap.value = textureRingMaterial.roug;
+    uniformsTextureRingMaterial.normalMap.value = textureRingMaterial.normal;
 
-    uniformsButtonMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
-    uniformsTopMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
+    uniformsTextureButtonMaterial.pointLightPosition.value = new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z);
+    uniformsTextureButtonMaterial.clight.value = new THREE.Vector3(lightParameters.intensity * lightParameters.red,
         lightParameters.intensity * lightParameters.green,
         lightParameters.intensity * lightParameters.blue);
-    uniformsButtonMaterial.diffuseMap.value = textureButtonMaterial.diffuse;
-    uniformsButtonMaterial.specularMap.value = textureButtonMaterial.specular;
-    uniformsButtonMaterial.rougMap.value = textureButtonMaterial.roug;
-    uniformsButtonMaterial.normalMap.value = textureButtonMaterial.normal;
+    uniformsTextureButtonMaterial.diffuseMap.value = textureButtonMaterial.diffuse;
+    uniformsTextureButtonMaterial.specularMap.value = textureButtonMaterial.specular;
+    uniformsTextureButtonMaterial.rougMap.value = textureButtonMaterial.roug;
+    uniformsTextureButtonMaterial.normalMap.value = textureButtonMaterial.normal;
 }
 
-function initializeUniforms() {
-    uniformsTopMaterial = {
+function initializeTextureUniforms() {
+    uniformsTextureTopMaterial = {
         pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
         clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
         diffuseMap: { type: "t", value: textureTopMaterial.diffuse },
@@ -399,7 +435,7 @@ function initializeUniforms() {
         normalMap: { type: "t", value: textureTopMaterial.normal },
     }
 
-    uniformsBottomMaterial = {
+    uniformsTextureBottomMaterial = {
         pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
         clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
         diffuseMap: { type: "t", value: textureBottomMaterial.diffuse },
@@ -408,7 +444,7 @@ function initializeUniforms() {
         normalMap: { type: "t", value: textureBottomMaterial.normal },
     }
 
-    uniformsRingMaterial = {
+    uniformsTextureRingMaterial = {
         pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
         clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
         diffuseMap: { type: "t", value: textureRingMaterial.diffuse },
@@ -417,13 +453,47 @@ function initializeUniforms() {
         normalMap: { type: "t", value: textureRingMaterial.normal },
     }
 
-    uniformsButtonMaterial = {
+    uniformsTextureButtonMaterial = {
         pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
         clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
         diffuseMap: { type: "t", value: textureButtonMaterial.diffuse },
         specularMap: { type: "t", value: textureButtonMaterial.specular },
         rougMap: { type: "t", value: textureButtonMaterial.roug },
         normalMap: { type: "t", value: textureButtonMaterial.normal },
+    }
+}
+
+function initializeValueUniforms() {
+    uniformsValueTopMaterial = {
+        pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
+        clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
+        diffuse: { type: "v3", value: new THREE.Vector3(valueTopMaterial.diffuse.x, valueTopMaterial.diffuse.y, valueTopMaterial.diffuse.z) },
+        specular: { type: "v3", value: new THREE.Vector3(valueTopMaterial.specular.x, valueTopMaterial.specular.y, valueTopMaterial.specular.z) },
+        roug: { type: "f", value: valueTopMaterial.roug },
+    }
+
+    uniformsValueBottomMaterial = {
+        pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
+        clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
+        diffuse: { type: "v3", value: new THREE.Vector3(valueBottomMaterial.diffuse.x, valueBottomMaterial.diffuse.y, valueBottomMaterial.diffuse.z) },
+        specular: { type: "v3", value: new THREE.Vector3(valueBottomMaterial.specular.x, valueBottomMaterial.specular.y, valueBottomMaterial.specular.z) },
+        roug: { type: "f", value: valueBottomMaterial.roug },
+    }
+
+    uniformsValueRingMaterial = {
+        pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
+        clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
+        diffuse: { type: "v3", value: new THREE.Vector3(valueRingMaterial.diffuse.x, valueRingMaterial.diffuse.y, valueRingMaterial.diffuse.z) },
+        specular: { type: "v3", value: new THREE.Vector3(valueRingMaterial.specular.x, valueRingMaterial.specular.y, valueRingMaterial.specular.z) },
+        roug: { type: "f", value: valueRingMaterial.roug },
+    }
+
+    uniformsValueButtonMaterial = {
+        pointLightPosition: { type: "v3", value: new THREE.Vector3(lightMesh.position.x, lightMesh.position.y, lightMesh.position.z) },
+        clight: { type: "v3", value: new THREE.Vector3(1.0, 1.0, 1.0) },
+        diffuse: { type: "v3", value: new THREE.Vector3(valueButtonMaterial.diffuse.x, valueButtonMaterial.diffuse.y, valueButtonMaterial.diffuse.z) },
+        specular: { type: "v3", value: new THREE.Vector3(valueButtonMaterial.specular.x, valueButtonMaterial.specular.y, valueButtonMaterial.specular.z) },
+        roug: { type: "f", value: valueButtonMaterial.roug },
     }
 }
 

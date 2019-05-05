@@ -23,7 +23,7 @@
     <script src="../lib/OBJLoader2.js"></script>
     <script src="../lib/BufferGeometryUtils.js"></script>
 
-    <script type="text/x-glsl" id="vertex">
+    <script type="text/x-glsl" id="texturingVertex">
         attribute vec4 tangent;
         varying vec2 vertexUV;
         varying vec3 vNormal;
@@ -44,7 +44,7 @@
 		}   
     </script>
 
-    <script type="text/x-glsl" id="fragment">
+    <script type="text/x-glsl" id="texturingFragment">
         varying vec3 vNormal;
         varying vec3 vTangent;
 		varying vec3 vBitangent;

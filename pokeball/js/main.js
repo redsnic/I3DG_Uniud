@@ -1,15 +1,13 @@
 import { Pokeball } from "./Pokeball.js";
 import { PokeballComponent } from "./PokeballComponent.js";
 
-let globalTopMaterial, globalBottomMaterial, globalRingMaterial, globalButtonMaterial;
-
 
 function init() {
 
     container = document.createElement('div');
     document.body.appendChild(container);
     camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.set(0, 0, 120);
+    camera.position.set(0, 0, 15);
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xd0d0d0);
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -27,14 +25,14 @@ function init() {
 
     loadHDRCubeMap();
 
-    globalPokeball = new Pokeball("res/models/pokeball.obj");
+    globalPokeball = new Pokeball(POKEBALL_OBJECT_PATH);
     globalPokeball.loadComponents();
     scene.add(globalPokeball._pivot);
 
 
 }
 
-function render() {
+render = function() {
     requestAnimationFrame(render);
     stats.begin();
     if (globalPokeball.isObjReady() && globalEnvMapLoaded) {
@@ -49,13 +47,13 @@ function render() {
             globalPokeball.applyMaterialToPart("top", globalTopMaterial);
             globalBottomMaterial = new THREE.MeshStandardMaterial({color:0x0000ff, envMap : globalHDRCubeRenderTarget.texture }); 
             globalPokeball.applyMaterialToPart("bottom", globalBottomMaterial);
-            globalRingMaterial   = new THREE.MeshStandardMaterial({color:0x000000, envMap : globalHDRCubeRenderTarget.texture });
+            globalRingMaterial   = new THREE.MeshStandardMaterial({color:0x000000, envMap : globalHDRCubeRenderTarget.texture});
             globalPokeball.applyMaterialToPart("ring", globalRingMaterial);
-            globalButtonMaterial = new THREE.MeshStandardMaterial({color:0x00ff00, envMap : globalHDRCubeRenderTarget.texture });
+            globalButtonMaterial = new THREE.MeshStandardMaterial({color:0x00ff00, envMap : globalHDRCubeRenderTarget.texture});
             globalPokeball.applyMaterialToPart("button", globalButtonMaterial);
             globalInitialMaterialSet = true;
-            setMaterial(globalTopMaterial, "test");
-            setMaterial(globalBottomMaterial, "test");
+            setAllMaterials("mio");
+            //toggleWornAll();
         }
         
 

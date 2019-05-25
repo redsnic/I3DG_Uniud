@@ -5,7 +5,11 @@ let gui;
 
 let pokeballParameters = {
     used: false,
-    stockTexture: "pokeball"
+    stockTexture: "pokeball",
+    top: null,
+    button: null,
+    bottom: null,
+    ring: null
 }
 
 function clearGui() {
@@ -26,8 +30,7 @@ function buildGui() {
             }else{
                 deactivateWornAll();
                 globalWornStatus = false;
-            }
-            
+            }         
         }
     );
 
@@ -35,7 +38,30 @@ function buildGui() {
         function (newVal) {
             setAllMaterials(newVal);
         }
+    );
 
+    gui.add(pokeballParameters, 'top', ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
+        function (newVal) {
+            setMaterial(globalTopMaterial, newVal);
+        }
+    );
+
+    gui.add(pokeballParameters, 'bottom',  ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
+        function (newVal) {
+            setMaterial(globalBottomMaterial, newVal);
+        }
+    );
+
+    gui.add(pokeballParameters, 'button',  ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
+        function (newVal) {
+            setMaterial(globalButtonMaterial, newVal);
+        }
+    );
+
+    gui.add(pokeballParameters, 'ring',  ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
+        function (newVal) {
+            setMaterial(globalRingMaterial, newVal);
+        }
     );
 
 
@@ -62,7 +88,7 @@ function init() {
     stats = new Stats();
     container.appendChild(stats.dom);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.minDistance = 10;
+    controls.minDistance = 7;
 	controls.maxDistance = 30;
 
     loadHDRCubeMap();
@@ -94,11 +120,9 @@ render = function () {
             globalButtonMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00, envMap: globalHDRCubeRenderTarget.texture });
             globalPokeball.applyMaterialToPart("button", globalButtonMaterial);
             globalInitialMaterialSet = true;
-            setAllMaterials("red_metal");
+            setAllMaterials("pokeball");
 
         }
-
-
     }
     renderer.render(scene, camera);
     stats.end();

@@ -199,6 +199,21 @@ let setMaterial = function (material, name) {
                 loadTexture(OTHERS_RESOURCES_PATH + 'tiles/' + 'normal.jpg'),
                 loadTexture(OTHERS_RESOURCES_PATH + 'tiles/' + 'roughness.jpg'));
             break;
+        case "rubber":
+            changeSpecialMaterial(material,
+                loadTexture(OTHERS_RESOURCES_PATH + 'rubber/' + 'diffuse.png'),
+                loadTexture(OTHERS_RESOURCES_PATH + 'rubber/' + 'normal.png'),
+                null);
+            break;
+        case "mirror":
+            changeMaterial(material,
+                makeColor(255, 255, 255),
+                null,
+                1,
+                loadTexture(SHARED_RESOURCES_PATH + 'normal.png'),
+                0.01,
+                0.5);
+            break;
     }
 
 }
@@ -214,11 +229,11 @@ let changeMaterial = function (material, color, map, metalness, normalMap, rough
     material.roughnessHigh = roughHi;
     material.roughnessLow = roughLow;
     material.isSpecialMaterial = false;
-    if(material.map) material.map.needsUpdate = true;
+    if (material.map) material.map.needsUpdate = true;
     material.needsUpdate = true;
-    if(globalWornStatus == true){
+    if (globalWornStatus == true) {
         activateWorn(material);
-    }else{
+    } else {
         deactivateWorn(material);
     }
 }
@@ -237,6 +252,7 @@ let changeSpecialMaterial = function (material, map, normalMap, roughMap) {
     //if(material.map) material.map.needsUpdate = true;
     material.needsUpdate = true;
 }
+
 
 
 

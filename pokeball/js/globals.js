@@ -6,6 +6,7 @@ let globalInitialMaterialSet = false;
 
 let scene, camera, controls, stats, renderer, container, render;
 let globalTopMaterial, globalBottomMaterial, globalRingMaterial, globalButtonMaterial;
+let globalWornStatus = false;
 
 let ENVMAP_PATH = "res/textures/shared/env_hdr/";
 let SHARED_RESOURCES_PATH = "res/textures/shared/";

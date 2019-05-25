@@ -210,11 +210,17 @@ let changeMaterial = function (material, color, map, metalness, normalMap, rough
     material.envMap = globalHDRCubeRenderTarget.texture;
     material.normalMap = normalMap;
     material.roughness = roughLow;
+    material.roughnessMap = null;
     material.roughnessHigh = roughHi;
     material.roughnessLow = roughLow;
     material.isSpecialMaterial = false;
     if(material.map) material.map.needsUpdate = true;
     material.needsUpdate = true;
+    if(globalWornStatus == true){
+        activateWorn(material);
+    }else{
+        deactivateWorn(material);
+    }
 }
 
 let changeSpecialMaterial = function (material, map, normalMap, roughMap) {
@@ -233,16 +239,26 @@ let changeSpecialMaterial = function (material, map, normalMap, roughMap) {
 }
 
 
-let toggleWorn = function (material) {
+
+let activateWorn = function (material) {
     if (material.isSpecialMaterial) return;
 
     if (material.roughnessMap == null) {
         material.roughnessMap = loadTexture(SHARED_RESOURCES_PATH + 'roughness.png');
         material.roughness = material.roughnessHigh;
-    } else {
+    }
+
+    material.needsUpdate = true;
+}
+
+let deactivateWorn = function (material) {
+    if (material.isSpecialMaterial) return;
+
+    if (material.roughnessMap != null) {
         material.roughnessMap = null;
         material.roughness = material.roughnessLow;
     }
+
     material.needsUpdate = true;
 }
 
@@ -253,11 +269,18 @@ let setAllMaterials = function (name) {
     setMaterial(globalRingMaterial, name);
 }
 
-let toggleWornAll = function () {
-    toggleWorn(globalTopMaterial);
-    toggleWorn(globalBottomMaterial);
-    toggleWorn(globalButtonMaterial);
-    toggleWorn(globalRingMaterial);
+let activateWornAll = function () {
+    activateWorn(globalTopMaterial);
+    activateWorn(globalBottomMaterial);
+    activateWorn(globalButtonMaterial);
+    activateWorn(globalRingMaterial);
+}
+
+let deactivateWornAll = function () {
+    deactivateWorn(globalTopMaterial);
+    deactivateWorn(globalBottomMaterial);
+    deactivateWorn(globalButtonMaterial);
+    deactivateWorn(globalRingMaterial);
 }
 
 let makeColor = function (R, G, B) {

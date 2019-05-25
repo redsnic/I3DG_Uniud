@@ -33,7 +33,6 @@ function loadTexture(file) {
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
         texture.offset.set(0, 0);
         texture.needsUpdate = true;
-        render();
     })
     return texture;
 }

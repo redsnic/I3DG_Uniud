@@ -1,6 +1,34 @@
 import { Pokeball } from "./Pokeball.js";
 import { PokeballComponent } from "./PokeballComponent.js";
 
+let gui;
+
+let pokeballParameters = {
+    used: false,
+    stockTexture: "pokeball"
+}
+
+function clearGui() {
+    if (gui) gui.destroy();
+    gui = new dat.GUI();
+    gui.open();
+}
+
+function buildGui(){
+    clearGui();
+
+    gui.add(pokeballParameters, 'used', false ).onChange( function() {
+        toggleWornAll();
+    });
+
+    gui.add(pokeballParameters, 'stockTexture', ["pokeball", "greatball", "ultraball", "fastball", "safariball", "netball"]).onChange(
+        function(newVal) {
+            setAllMaterials(newVal);
+        }
+    );
+
+
+}
 
 function init() {
 
@@ -52,8 +80,8 @@ render = function() {
             globalButtonMaterial = new THREE.MeshStandardMaterial({color:0x00ff00, envMap : globalHDRCubeRenderTarget.texture});
             globalPokeball.applyMaterialToPart("button", globalButtonMaterial);
             globalInitialMaterialSet = true;
-            setAllMaterials("mio");
-            //toggleWornAll();
+            setAllMaterials("red_metal");
+            
         }
         
 
@@ -71,6 +99,7 @@ function onWindowResize() {
 }
 
 init();
+buildGui();
 render();
 
 

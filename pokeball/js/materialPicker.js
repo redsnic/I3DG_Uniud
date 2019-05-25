@@ -213,6 +213,8 @@ let changeMaterial = function (material, color, map, metalness, normalMap, rough
     material.roughnessHigh = roughHi;
     material.roughnessLow = roughLow;
     material.isSpecialMaterial = false;
+    if(material.map) material.map.needsUpdate = true;
+    material.needsUpdate = true;
 }
 
 let changeSpecialMaterial = function (material, map, normalMap, roughMap) {
@@ -226,6 +228,8 @@ let changeSpecialMaterial = function (material, map, normalMap, roughMap) {
     material.roughnessLow = 0.;
     material.roughnessMap = roughMap;
     material.isSpecialMaterial = true;
+    //if(material.map) material.map.needsUpdate = true;
+    material.needsUpdate = true;
 }
 
 
@@ -239,6 +243,7 @@ let toggleWorn = function (material) {
         material.roughnessMap = null;
         material.roughness = material.roughnessLow;
     }
+    material.needsUpdate = true;
 }
 
 let setAllMaterials = function (name) {

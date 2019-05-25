@@ -69,16 +69,16 @@ function buildGui() {
 
 function init() {
 
-    container = document.createElement('div');
-    document.body.appendChild(container);
-    camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
+    container = document.getElementById("canvas");
+    document.getElementById("col").appendChild(container);
+    camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 1, 1000);
     camera.position.set(0, 0, 15);
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xd0d0d0);
     renderer = new THREE.WebGLRenderer({ antialias: true });
-    //renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setPixelRatio(1);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    //renderer.setPixelRatio(1);
+    renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
@@ -86,7 +86,7 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
 
     stats = new Stats();
-    container.appendChild(stats.dom);
+    //container.appendChild(stats.dom);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.minDistance = 7;
 	controls.maxDistance = 30;
@@ -129,8 +129,8 @@ render = function () {
 }
 
 function onWindowResize() {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    let width = container.clientWidth;
+    let height = container.clientHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);

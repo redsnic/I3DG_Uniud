@@ -5,11 +5,11 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+    <meta name="description" content="A pokeball configurator">
+    <meta name="author" content="Monadic parser">
+    <link rel="icon" href="index_files/favicon.ico">
 
-    <title>...</title>
+    <title>ACME Pokeball configurator</title>
 
     <!-- Bootstrap core CSS -->
     <link href="index_files/bootstrap.css" rel="stylesheet">
@@ -28,7 +28,6 @@
             margin: 0px;
             padding: 0px;
             position: static;
-            /* fixed or static */
             top: 0px;
             left: 0px;
         }
@@ -36,14 +35,11 @@
         #col {
             background-color: #000;
             width: 100%;
-            height: 86vh;
             border: 0px solid black;
             margin: 0px;
             padding: 0px;
             position: fixed;
-
-            /* fixed or static */
-            top: 7vh;
+            top: 8vh;
             bottom: 7vh;
             left: 1vw;
             right: 35vw;
@@ -73,26 +69,26 @@
     <script type="module" src="js/Pokeball.js"></script>
     <script type="module" src="js/PokeballComponent.js"></script>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ACME Kalos</a>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" style="font-size:2vh" href="#">ACME Kalos</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
             aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExample04">
+        <div class="collapse navbar-collapse" id="navbarsExample04" >
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" style="font-size:2vh" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Catalogue</a>
+                    <a class="nav-link" style="font-size:2vh" href="#">Catalogue</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Configurator <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" style="font-size:2vh" href="#">Configurator <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About us</a>
+                    <a class="nav-link" style="font-size:2vh" href="#">About us</a>
                 </li>
             </ul>
         </div>
@@ -108,9 +104,9 @@
             <div class="col-4">
 
                 <!-- Item conditions area -->
-                <div class="usedcard card" style="position: fixed; top: 8vh; bottom: 83vh; left: 69vw; right: 1vw">
+                <div class="usedcard card" style="position: fixed; top: 8vh; bottom: 83vh; left: 69vw; right: 1vw;">
                     <div class="card-header" style="margin: 0px; padding: 0.5vh; font-size:2vh;">
-                        Item conditions
+                        Item condition
                     </div>
                     <div class="btn-group" role="group"
                         style="position: fixed; top: 13vh; bottom: 84vh; left: 70vw; right: 2vw;">
@@ -308,10 +304,7 @@
         </div>
     </footer>
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="index_files/jquery-3.2.1.slim.min.js"></script>
     <script src="index_files/popper.js"></script>
     <script src="index_files/bootstrap.js"></script>
 

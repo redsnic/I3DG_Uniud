@@ -4,6 +4,6 @@ body {
 
 .navbar {
   margin-bottom: 2vh;
-  height: 5vh;
-  
+  height: 6vh;
+  line-height: 6vh;
 }

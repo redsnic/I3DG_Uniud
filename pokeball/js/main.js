@@ -67,6 +67,8 @@ function onWindowResize() {
 init();
 render();
 
+// the section below manages the input from the html elements in the html page
+
 /* ball preset selection */
 document.getElementById("pokeball").addEventListener("click", function () { setAllMaterials("pokeball"); });
 document.getElementById("greatball").addEventListener("click", function () { setAllMaterials("greatball"); });
@@ -138,6 +140,7 @@ document.getElementById("button-button").addEventListener("click", function () {
     selectedPart = "button"
 });
 
+// returns the material corresponding to the currently selected part of the ball
 let getPart = function () {
     switch (selectedPart) {
         case "top": return globalTopMaterial; break;

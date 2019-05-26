@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="index_files/sticky-footer.css" rel="stylesheet">
+    <link href="index_files/gallery.css" rel="stylesheet">
 
     <style>
         #canvas {
@@ -31,10 +32,11 @@
             top: 0px;
             left: 0px;
         }
+
         #col {
             background-color: #000;
             width: 100%;
-            height: 80vh;
+            height: 84vh;
             border: 0px solid black;
             margin: 0px;
             padding: 0px;
@@ -42,6 +44,14 @@
             /* fixed or static */
             top: 0px;
             left: 0px;
+        }
+
+        #option-menu {
+            height: 46vh;
+        }
+
+        #topsellingcard {
+            height: 15vh;
         }
     </style>
 </head>
@@ -105,18 +115,163 @@
     <!-- Begin page content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 bg-dark" id="col">
+            <div class="col-8" id="col">
                 <div id="canvas">
                 </div>
             </div>
-            <div class="col-lg-4 bg-light">menu</div>
+            <div class="col-4">
+                <h5>Item condition</h5>
+
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary" style="width:15.4vw">Left</button>
+                    <button type="button" class="btn btn-secondary" style="width:15.4vw">Middle</button>
+                </div>
+
+                <div class="maincard card" style="margin-top: 2vh; ">
+                    <div class="card-header" style="padding:0.7vh; margin:0vh">
+                        Top selling
+                    </div>
+                    <div class="card-body testimonial-group" id="topsellingcard" style="padding:0.5vh; height: 50%">
+                        <div class="row" style="height:100%; width:100%; margin:0px">
+                            <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                    src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;"></div>
+                            <div class="col-4" style="height:100%; width:100%"><img
+                                    src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                    style="height: 100%; width: 100%; object-fit: contain"></div>
+                            <div class="col-4" style="height:100%;width:100%"><img
+                                    src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                    style="height: 100%; width: 100%; object-fit: contain"></div>
+                            <div class="col-4" style="height:100%;width:100%"><img
+                                    src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                    style="height: 100%; width: 100%; object-fit: contain"></div>
+                            <div class="col-4" style="height:100%;width:100%"><img
+                                    src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                    style="height: 100%; width: 100%; object-fit: contain"></div>
+                            <div class="col-4" style="height:100%;width:100%"><img
+                                    src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                    style="height: 100%; width: 100%; object-fit: contain"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="foldercard card text-center" style="margin-top: 2vh;">
+                    <div class="card-header" style="margin-bottom:0px">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" href="mobile.html" data-toggle="tab">Top</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="tab">Bottom</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="tab">Button</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="tab">Ring</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body" id="option-menu">
+                        <div class="subfoldercard card" style="margin-top: 2vh; margin-top:0.5vh" >
+                            <div class="card-header" style="padding:0.7vh; margin:0vh">
+                                Metals
+                            </div>
+                            <div class="card-body testimonial-group" id="topsellingcard"
+                                style="padding:0.5vh; height: 50%">
+                                <div class="row" style="height:100%; width:100%; margin:0px">
+                                    <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subfoldercard card" style="margin-top: 2vh; ; margin-top:0.5vh">
+                            <div class="card-header" style="padding:0.7vh; margin:0vh">
+                                Ceramics
+                            </div>
+                            <div class="card-body testimonial-group" id="topsellingcard"
+                                style="padding:0.5vh; height: 50%">
+                                <div class="row" style="height:100%; width:100%; margin:0px">
+                                    <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subfoldercard card" style="margin-top: 2vh; ; margin-top:0.5vh">
+                            <div class="card-header" style="padding:0.7vh; margin:0vh">
+                                Others
+                            </div>
+                            <div class="card-body testimonial-group" id="topsellingcard"
+                                style="padding:0.5vh; height: 50%">
+                                <div class="row" style="height:100%; width:100%; margin:0px">
+                                    <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
+                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <!-- footer -->
-    <footer class="footer fixed-bottom">
-        <div class="container">
-            <span class="text-muted">Place sticky footer content here.</span>
+    <footer class="footer fixed-bottom ">
+        <div class="container text-right">
+            <button type="button" class="btn btn-primary pull-right"
+                style="width:16%; height: 4vh; font-size:2vh; margin:0px; padding:0px;">Go to Cart</button>
         </div>
     </footer>
 

@@ -1,7 +1,9 @@
 body {
-  padding-bottom: 20px;
+  padding-bottom: 0px;
 }
 
 .navbar {
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
+  height: 5vh;
+
 }

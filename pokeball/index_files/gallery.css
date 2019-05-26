@@ -1,0 +1,28 @@
+/* The heart of the matter */
+.testimonial-group > .row {
+  overflow-x: auto;
+  overflow-y:hidden;
+  white-space: nowrap;
+  display: inline-block;
+  flex-wrap: nowrap; 
+}
+.testimonial-group > .row > .col-4 {
+  display: inline-block;
+  float: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.maincard {
+    height: 18vh;
+}
+
+.subfoldercard {
+  height: 14vh;
+}
+
+.foldercard {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    height: 54.8vh;
+}

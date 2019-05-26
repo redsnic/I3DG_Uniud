@@ -1,6 +1,7 @@
 import { Pokeball } from "./Pokeball.js";
 import { PokeballComponent } from "./PokeballComponent.js";
 
+
 let gui;
 
 let pokeballParameters = {
@@ -86,7 +87,7 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
 
     stats = new Stats();
-    //container.appendChild(stats.dom);
+    container.appendChild(stats.dom);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.minDistance = 7;
 	controls.maxDistance = 30;
@@ -120,7 +121,7 @@ render = function () {
             globalButtonMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00, envMap: globalHDRCubeRenderTarget.texture });
             globalPokeball.applyMaterialToPart("button", globalButtonMaterial);
             globalInitialMaterialSet = true;
-            setAllMaterials("pokeball");
+            setAllMaterials("mio");
 
         }
     }
@@ -140,4 +141,6 @@ init();
 buildGui();
 render();
 
+
+document.getElementById("pokeball").addEventListener("click", function () { setAllMaterials("pokeball"); }); 
 

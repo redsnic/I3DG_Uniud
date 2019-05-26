@@ -13,16 +13,42 @@
   margin: 0px;
 }
 
-.maincard {
-    height: 18vh;
-}
-
-.subfoldercard {
-  height: 14vh;
+.topsellingcard {
+  top: 18vh;
+  bottom: 62vh;
+  left: 69vw;
+  right: 1vw;
+  position: fixed;
 }
 
 .foldercard {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    height: 54.8vh;
+  top: 39vh;
+  bottom: 7vh;
+  left: 69vw;
+  right: 1vw;
+  position: fixed;
+}
+
+.subfoldercard-1 {
+  top: 45vh;
+  bottom: 40vh;
+  left: 70vw;
+  right: 2vw;
+  position: fixed;
+}
+
+.subfoldercard-2 {
+  top: 61vh;
+  bottom: 24vh;
+  left: 70vw;
+  right: 2vw;
+  position: fixed;
+}
+
+.subfoldercard-3 {
+  top: 77vh;
+  bottom: 8vh;
+  left: 70vw;
+  right: 2vw;
+  position: fixed;
 }

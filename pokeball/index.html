@@ -36,22 +36,17 @@
         #col {
             background-color: #000;
             width: 100%;
-            height: 84vh;
+            height: 86vh;
             border: 0px solid black;
             margin: 0px;
             padding: 0px;
-            position: static;
+            position: fixed;
+
             /* fixed or static */
-            top: 0px;
-            left: 0px;
-        }
-
-        #option-menu {
-            height: 46vh;
-        }
-
-        #topsellingcard {
-            height: 15vh;
+            top: 7vh;
+            bottom: 7vh;
+            left: 1vw;
+            right: 35vw;
         }
     </style>
 </head>
@@ -106,9 +101,6 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-md-0">
-                <input class="form-control" type="text" placeholder="Search">
-            </form>
         </div>
     </nav>
 
@@ -120,148 +112,216 @@
                 </div>
             </div>
             <div class="col-4">
-                <h5>Item condition</h5>
 
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary" style="width:15.4vw">Left</button>
-                    <button type="button" class="btn btn-secondary" style="width:15.4vw">Middle</button>
+                <!-- Item conditions area -->
+                <div class="usedcard card" style="position: fixed; top: 8vh; bottom: 83vh; left: 69vw; right: 1vw">
+                    <div class="card-header" style="margin: 0px; padding: 0.5vh; font-size:2vh;">
+                        Item conditions
+                    </div>
+                    <div class="btn-group" role="group"
+                        style="position: fixed; top: 13vh; bottom: 84vh; left: 70vw; right: 2vw;">
+                        <button type="button" class="btn btn-primary"
+                            style="width:15vw; font-size:2vh; margin:0px; padding:0px;">New</button>
+                        <button type="button" class="btn btn-secondary"
+                            style="width:15vw; font-size:2vh; margin:0px; padding:0px;">Used</button>
+                    </div>
                 </div>
+                <!-- end -->
 
-                <div class="maincard card" style="margin-top: 2vh; ">
-                    <div class="card-header" style="padding:0.7vh; margin:0vh">
-                        Top selling
+                <!-- Top selling area -->
+                <div class="topsellingcard card">
+                    <div class="card-header" style="margin: 0px; padding: 0.5vh; font-size:2vh;">
+                        Top selling designs
                     </div>
                     <div class="card-body testimonial-group" id="topsellingcard" style="padding:0.5vh; height: 50%">
                         <div class="row" style="height:100%; width:100%; margin:0px">
-                            <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                            <div class="col-4" style="height:100%; width:100%">
+                                <img id="pokeball"
                                     src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;"></div>
-                            <div class="col-4" style="height:100%; width:100%"><img
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                            </div>
+                            <div class="col-4" style="height:100%; width:100%">
+                                <img id="greatball"
                                     src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                    style="height: 100%; width: 100%; object-fit: contain"></div>
-                            <div class="col-4" style="height:100%;width:100%"><img
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                            </div>
+                            <div class="col-4" style="height:100%; width:100%">
+                                <img id="ultraball"
                                     src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                    style="height: 100%; width: 100%; object-fit: contain"></div>
-                            <div class="col-4" style="height:100%;width:100%"><img
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                            </div>
+                            <div class="col-4" style="height:100%; width:100%">
+                                <img id="fastball"
                                     src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                    style="height: 100%; width: 100%; object-fit: contain"></div>
-                            <div class="col-4" style="height:100%;width:100%"><img
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                            </div>
+                            <div class="col-4" style="height:100%; width:100%">
+                                <img id="safariball"
                                     src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                    style="height: 100%; width: 100%; object-fit: contain"></div>
-                            <div class="col-4" style="height:100%;width:100%"><img
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                            </div>
+                            <div class="col-4" style="height:100%; width:100%">
+                                <img id="netball"
                                     src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                    style="height: 100%; width: 100%; object-fit: contain"></div>
+                                    style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- end -->
 
-                <div class="foldercard card text-center" style="margin-top: 2vh;">
-                    <div class="card-header" style="margin-bottom:0px">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" href="mobile.html" data-toggle="tab">Top</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="tab">Bottom</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="tab">Button</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="tab">Ring</a>
-                            </li>
-                        </ul>
+
+                <!-- parts customization -->
+                <div class="foldercard card text-center">
+                    <!-- parts selection area -->
+                    <div class="card-header" style="position: fixed; top: 39vh; bottom: 56vh; left: 69vw; right: 1vw;">
+                        <div class="btn-group" role="group"
+                            style="position: fixed; top: 40vh; bottom: 57vh; left: 70vw; right: 2vw;">
+                            <button type="button" class="btn btn-primary"
+                                style="width:7.5vw; font-size:2vh; margin:0px; padding:0px;">Top</button>
+                            <button type="button" class="btn btn-secondary"
+                                style="width:7.5vw; font-size:2vh; margin:0px; padding:0px;">Bottom</button>
+                            <button type="button" class="btn btn-secondary"
+                                style="width:7.5vw; font-size:2vh; margin:0px; padding:0px;">Ring</button>
+                            <button type="button" class="btn btn-secondary"
+                                style="width:7.5vw; font-size:2vh; margin:0px; padding:0px;">Button</button>
+                        </div>
                     </div>
+                    <!-- end -->
+
                     <div class="card-body" id="option-menu">
-                        <div class="subfoldercard card" style="margin-top: 2vh; margin-top:0.5vh" >
-                            <div class="card-header" style="padding:0.7vh; margin:0vh">
+                        <!-- metals parts -->
+                        <div class="subfoldercard-1 card">
+                            <div class="card-header" style="margin: 0px; padding: 0.0vh; font-size:1.8vh;">
                                 Metals
                             </div>
                             <div class="card-body testimonial-group" id="topsellingcard"
                                 style="padding:0.5vh; height: 50%">
                                 <div class="row" style="height:100%; width:100%; margin:0px">
-                                    <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="red_metal"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
                                             style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
                                     </div>
-                                    <div class="col-4" style="height:100%; width:100%"><img
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="green_metal"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="blue_metal"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="black_metal"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="gold_metal"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="copper_metal"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="subfoldercard card" style="margin-top: 2vh; ; margin-top:0.5vh">
-                            <div class="card-header" style="padding:0.7vh; margin:0vh">
+                        <!-- end metal-->
+
+                        <!-- ceramic parts -->
+                        <div class="subfoldercard-2 card">
+                            <div class="card-header" style="margin: 0px; padding: 0.0vh; font-size:1.8vh;">
                                 Ceramics
                             </div>
                             <div class="card-body testimonial-group" id="topsellingcard"
                                 style="padding:0.5vh; height: 50%">
                                 <div class="row" style="height:100%; width:100%; margin:0px">
-                                    <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="red_ceramic"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
                                             style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
                                     </div>
-                                    <div class="col-4" style="height:100%; width:100%"><img
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="green_ceramic"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="blue_ceramic"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="purple_ceramic"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="white_ceramic"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="black_ceramic"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="subfoldercard card" style="margin-top: 2vh; ; margin-top:0.5vh">
-                            <div class="card-header" style="padding:0.7vh; margin:0vh">
-                                Others
+                        <!-- end ceramic-->
+
+                        <!-- other parts -->
+                        <div class="subfoldercard-3 card">
+                            <div class="card-header" style="margin: 0px; padding: 0.0vh; font-size:1.8vh;">
+                                Special materials
                             </div>
                             <div class="card-body testimonial-group" id="topsellingcard"
                                 style="padding:0.5vh; height: 50%">
                                 <div class="row" style="height:100%; width:100%; margin:0px">
-                                    <div class="col-4" style="height:100%; width:100%"><img id="pokeball"
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="fabric"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
                                             style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
                                     </div>
-                                    <div class="col-4" style="height:100%; width:100%"><img
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="marble"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="wood"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="tiles"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="rubber"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
-                                    <div class="col-4" style="height:100%;width:100%"><img
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
+                                    <div class="col-4" style="height:100%; width:100%">
+                                        <img id="mirror"
                                             src="https://66.media.tumblr.com/3cf0fa2a44d8ec3e753d014cd1c1904f/tumblr_obito1d2TV1voqnhpo4_250.png"
-                                            style="height: 100%; width: 100%; object-fit: contain"></div>
+                                            style="height: 100%; width: 100%; object-fit: contain; cursor: pointer;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- end others-->
+
                     </div>
                 </div>
+                <!-- end -->
             </div>
 
         </div>

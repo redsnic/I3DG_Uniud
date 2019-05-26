@@ -87,7 +87,7 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
 
     stats = new Stats();
-    container.appendChild(stats.dom);
+    //container.appendChild(stats.dom);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.minDistance = 7;
 	controls.maxDistance = 30;

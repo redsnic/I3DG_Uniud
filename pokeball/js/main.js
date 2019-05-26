@@ -1,73 +1,6 @@
 import { Pokeball } from "./Pokeball.js";
 import { PokeballComponent } from "./PokeballComponent.js";
 
-
-let gui;
-
-let pokeballParameters = {
-    used: false,
-    stockTexture: "pokeball",
-    top: null,
-    button: null,
-    bottom: null,
-    ring: null
-}
-
-function clearGui() {
-    if (gui) gui.destroy();
-    gui = new dat.GUI();
-    gui.open();
-}
-
-function buildGui() {
-    clearGui();
-
-    gui.add(pokeballParameters, 'used', false).onChange(
-        function () {
-            globalWornStatus = pokeballParameters.used; 
-            if(globalWornStatus == true){
-                activateWornAll();
-                globalWornStatus = true;
-            }else{
-                deactivateWornAll();
-                globalWornStatus = false;
-            }         
-        }
-    );
-
-    gui.add(pokeballParameters, 'stockTexture', ["pokeball", "greatball", "ultraball", "fastball", "safariball", "netball"]).onChange(
-        function (newVal) {
-            setAllMaterials(newVal);
-        }
-    );
-
-    gui.add(pokeballParameters, 'top', ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
-        function (newVal) {
-            setMaterial(globalTopMaterial, newVal);
-        }
-    );
-
-    gui.add(pokeballParameters, 'bottom',  ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
-        function (newVal) {
-            setMaterial(globalBottomMaterial, newVal);
-        }
-    );
-
-    gui.add(pokeballParameters, 'button',  ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
-        function (newVal) {
-            setMaterial(globalButtonMaterial, newVal);
-        }
-    );
-
-    gui.add(pokeballParameters, 'ring',  ["red_metal", "green_metal", "blue_metal", "black_metal", "gold_metal", "copper_metal", "red_ceramic", "purple_ceramic", "green_ceramic", "blue_ceramic", "white_ceramic", "black_ceramic","fabric","marble","wood","tiles","rubber","mirror"]).onChange(
-        function (newVal) {
-            setMaterial(globalRingMaterial, newVal);
-        }
-    );
-
-
-}
-
 function init() {
 
     container = document.getElementById("canvas");
@@ -75,7 +8,7 @@ function init() {
     camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 1, 1000);
     camera.position.set(0, 0, 15);
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xd0d0d0);
+    scene.background = new THREE.Color(0xffffff);
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     //renderer.setPixelRatio(1);
@@ -86,24 +19,19 @@ function init() {
 
     window.addEventListener('resize', onWindowResize, false);
 
-    stats = new Stats();
-    //container.appendChild(stats.dom);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.minDistance = 7;
-	controls.maxDistance = 30;
+    controls.maxDistance = 30;
 
     loadHDRCubeMap();
 
     globalPokeball = new Pokeball(POKEBALL_OBJECT_PATH);
     globalPokeball.loadComponents();
     scene.add(globalPokeball._pivot);
-
-
 }
 
 render = function () {
     requestAnimationFrame(render);
-    stats.begin();
     if (globalPokeball.isObjReady() && globalEnvMapLoaded) {
         let renderTarget = globalHDRCubeRenderTarget;
         let cubeMap = globalHDRCubeMap;
@@ -121,12 +49,11 @@ render = function () {
             globalButtonMaterial = new THREE.MeshStandardMaterial({ color: 0x00ff00, envMap: globalHDRCubeRenderTarget.texture });
             globalPokeball.applyMaterialToPart("button", globalButtonMaterial);
             globalInitialMaterialSet = true;
-            setAllMaterials("mio");
+            setAllMaterials("pokeball");
 
         }
     }
     renderer.render(scene, camera);
-    stats.end();
 }
 
 function onWindowResize() {
@@ -138,9 +65,109 @@ function onWindowResize() {
 }
 
 init();
-buildGui();
 render();
 
+/* ball preset selection */
+document.getElementById("pokeball").addEventListener("click", function () { setAllMaterials("pokeball"); });
+document.getElementById("greatball").addEventListener("click", function () { setAllMaterials("greatball"); });
+document.getElementById("ultraball").addEventListener("click", function () { setAllMaterials("ultraball"); });
+document.getElementById("fastball").addEventListener("click", function () { setAllMaterials("fastball"); });
+document.getElementById("safariball").addEventListener("click", function () { setAllMaterials("safariball"); });
+document.getElementById("netball").addEventListener("click", function () { setAllMaterials("netball"); });
 
-document.getElementById("pokeball").addEventListener("click", function () { setAllMaterials("pokeball"); }); 
+/* used-new manager */
+document.getElementById("used-button").addEventListener("click", function () {
+    document.getElementById("used-button").classList.add('btn-primary');
+    document.getElementById("used-button").classList.remove('btn-secondary');
+    document.getElementById("new-button").classList.add('btn-secondary');
+    document.getElementById("new-button").classList.remove('btn-primary');
+    activateWornAll(); globalWornStatus = true;
+});
+document.getElementById("new-button").addEventListener("click", function () {
+    document.getElementById("new-button").classList.add('btn-primary');
+    document.getElementById("new-button").classList.remove('btn-secondary');
+    document.getElementById("used-button").classList.add('btn-secondary');
+    document.getElementById("used-button").classList.remove('btn-primary');
+    deactivateWornAll(); globalWornStatus = false;
+});
 
+/* part button manager */
+let selectedPart = "top";
+document.getElementById("top-button").addEventListener("click", function () {
+    document.getElementById("top-button").classList.add('btn-primary');
+    document.getElementById("top-button").classList.remove('btn-secondary');
+    document.getElementById("bottom-button").classList.add('btn-secondary');
+    document.getElementById("bottom-button").classList.remove('btn-primary');
+    document.getElementById("ring-button").classList.add('btn-secondary');
+    document.getElementById("ring-button").classList.remove('btn-primary');
+    document.getElementById("button-button").classList.add('btn-secondary');
+    document.getElementById("button-button").classList.remove('btn-primary');
+    selectedPart = "top"
+});
+document.getElementById("bottom-button").addEventListener("click", function () {
+    document.getElementById("bottom-button").classList.add('btn-primary');
+    document.getElementById("bottom-button").classList.remove('btn-secondary');
+    document.getElementById("top-button").classList.add('btn-secondary');
+    document.getElementById("top-button").classList.remove('btn-primary');
+    document.getElementById("ring-button").classList.add('btn-secondary');
+    document.getElementById("ring-button").classList.remove('btn-primary');
+    document.getElementById("button-button").classList.add('btn-secondary');
+    document.getElementById("button-button").classList.remove('btn-primary');
+    selectedPart = "bottom"
+});
+document.getElementById("ring-button").addEventListener("click", function () {
+    document.getElementById("ring-button").classList.add('btn-primary');
+    document.getElementById("ring-button").classList.remove('btn-secondary');
+    document.getElementById("top-button").classList.add('btn-secondary');
+    document.getElementById("top-button").classList.remove('btn-primary');
+    document.getElementById("bottom-button").classList.add('btn-secondary');
+    document.getElementById("bottom-button").classList.remove('btn-primary');
+    document.getElementById("button-button").classList.add('btn-secondary');
+    document.getElementById("button-button").classList.remove('btn-primary');
+    selectedPart = "ring"
+});
+document.getElementById("button-button").addEventListener("click", function () {
+    document.getElementById("button-button").classList.add('btn-primary');
+    document.getElementById("button-button").classList.remove('btn-secondary');
+    document.getElementById("top-button").classList.add('btn-secondary');
+    document.getElementById("top-button").classList.remove('btn-primary');
+    document.getElementById("bottom-button").classList.add('btn-secondary');
+    document.getElementById("bottom-button").classList.remove('btn-primary');
+    document.getElementById("ring-button").classList.add('btn-secondary');
+    document.getElementById("ring-button").classList.remove('btn-primary');
+    selectedPart = "button"
+});
+
+let getPart = function () {
+    switch (selectedPart) {
+        case "top": return globalTopMaterial; break;
+        case "bottom": return globalBottomMaterial; break;
+        case "ring": return globalRingMaterial; break;
+        case "button": return globalButtonMaterial; break;
+        default : console.log("error in getPart()"); break;
+    } 
+} 
+
+/* metals */
+document.getElementById("red_metal").addEventListener("click", function () { setMaterial(getPart(), "red_metal"); });
+document.getElementById("green_metal").addEventListener("click", function () { setMaterial(getPart(), "green_metal"); });
+document.getElementById("blue_metal").addEventListener("click", function () { setMaterial(getPart(), "blue_metal"); });
+document.getElementById("black_metal").addEventListener("click", function () { setMaterial(getPart(), "black_metal"); });
+document.getElementById("gold_metal").addEventListener("click", function () { setMaterial(getPart(), "gold_metal");});
+document.getElementById("copper_metal").addEventListener("click", function () { setMaterial(getPart(), "copper_metal"); });
+
+/* ceramics */
+document.getElementById("red_ceramic").addEventListener("click", function () { setMaterial(getPart(), "red_ceramic"); });
+document.getElementById("green_ceramic").addEventListener("click", function () { setMaterial(getPart(), "green_ceramic"); });
+document.getElementById("blue_ceramic").addEventListener("click", function () { setMaterial(getPart(), "blue_ceramic"); });
+document.getElementById("purple_ceramic").addEventListener("click", function () { setMaterial(getPart(), "purple_ceramic"); });
+document.getElementById("white_ceramic").addEventListener("click", function () { setMaterial(getPart(), "white_ceramic");});
+document.getElementById("black_ceramic").addEventListener("click", function () { setMaterial(getPart(), "black_ceramic"); });
+
+/* specials */
+document.getElementById("fabric").addEventListener("click", function () { setMaterial(getPart(), "fabric"); });
+document.getElementById("marble").addEventListener("click", function () { setMaterial(getPart(), "marble"); });
+document.getElementById("wood").addEventListener("click", function () { setMaterial(getPart(), "wood"); });
+document.getElementById("tiles").addEventListener("click", function () { setMaterial(getPart(), "tiles"); });
+document.getElementById("rubber").addEventListener("click", function () { setMaterial(getPart(), "rubber");});
+document.getElementById("mirror").addEventListener("click", function () { setMaterial(getPart(), "mirror"); });

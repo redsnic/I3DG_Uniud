@@ -3,13 +3,6 @@ let setMaterial = function (material, name) {
 
 
     switch (name) {
-        case "mio":
-            changeMaterial(material,
-                new THREE.Vector3(1, 1, 1),
-                loadTexture('mio.jpg'),
-                0,
-                loadTexture(SHARED_RESOURCES_PATH + 'normal.png'));
-            break;
         /* STOCK TEXTURES */
         case "pokeball":
             changeMaterial(material,
